@@ -60,10 +60,39 @@ static List Delete(List head, NodeElement deletelement)
 	return head;
 }
 
+// 默认的是插入指定节点之后
 static List Insert(List head, NodeElement insertelement, Position position)
 {
-	
+	Position position_insert = NULL;
+	Position position_next = NULL;
+	position_insert = (Position)malloc(sizeof(struct Node));
+	if(position_insert==NULL){
+		fprintf(stderr,"%s:there is some error during malloc", __func__);
+		return NULL;
+	}
+	position_insert = insertelement;
+	if(!IsEmptyOrLast(position)){
+		position_next = position->Next;
+		position_insert->Next = position_next;
+		position->Next = position_insert;
+	}else{
+		position->Next = position_insert;
+	}
+	return head;
 }
+
+static void DeleteList(List head)
+{
+	Position position = head;
+	Position position_delete = NULL;
+	while(position!=NULL){
+		position_delete = position;
+		position = position->Next;
+		free(position_delete);
+		position_delete = NULL;
+	}
+}
+
 int main()
 {
 	printf("hello world\n");

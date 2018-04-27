@@ -70,7 +70,7 @@ static List Insert(List head, NodeElement insertelement, Position position)
 		fprintf(stderr,"%s:there is some error during malloc", __func__);
 		return NULL;
 	}
-	position_insert = insertelement;
+	position_insert->element = insertelement;
 	if(!IsEmptyOrLast(position)){
 		position_next = position->Next;
 		position_insert->Next = position_next;
@@ -93,7 +93,40 @@ static void DeleteList(List head)
 	}
 }
 
+static Position CreateListCell(List ahead,  NodeElement element){
+	Position position = NULL;
+	position  = (Position)malloc(sizeof(struct Node));
+	if(position==NULL){
+		fprintf(stderr, "there is no space\n");
+		return NULL;
+	}
+	position->element = element;
+	ahead->Next = position;
+	position->Next = NULL;
+	return position;
+}
+
+static void OverViewList(List head){
+	Position position = head;
+	while(position!=NULL){
+		printf("element is %d\n", position->element);
+		position = position->Next;
+	}
+}
+
 int main()
 {
-	printf("hello world\n");
+	List head=NULL;
+	Position position = NULL;
+	head  = (Position)malloc(sizeof(struct Node));
+	if(head==NULL){
+		fprintf(stderr, "there is no space\n");
+		return -1;
+	}
+	head->element = 0;
+	head->Next = NULL;
+	
+	position = CreateListCell(head, 1);
+	position = CreateListCell(position, 2);
+	OverViewList(head);
 }

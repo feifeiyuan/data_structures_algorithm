@@ -1,0 +1,10 @@
+Exception: STATUS_ACCESS_VIOLATION at eip=0040144E
+eax=00000000 ebx=0028CCAC ecx=0028CA58 edx=00000000 esi=612AAF8F edi=612AAF8A
+ebp=0028CC58 esp=0028CC30 program=D:\UserData\Personal\Github\data_structures_algorithm\list\a.exe, pid 4316, thread main
+cs=0023 ds=002B es=002B fs=0053 gs=002B ss=002B
+Stack trace:
+Frame     Function  Args
+0028CC58  0040144E (800001F8, 00000002, 0028CD84, 61006A20)
+0028CC88  00401527 (00000001, 0028CCAC, 800000D0, 610079C2)
+0028CD28  61007A27 (00000000, 0028CD84, 61006A20, 00000000)
+End of stack trace

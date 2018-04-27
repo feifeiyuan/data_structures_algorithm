@@ -93,7 +93,7 @@ static void DeleteList(List head)
 	}
 }
 
-static Position CreateListCell(List ahead,  NodeElement element){
+Position CreateListCell(List ahead,  NodeElement element){
 	Position position = NULL;
 	position  = (Position)malloc(sizeof(struct Node));
 	if(position==NULL){
@@ -106,27 +106,26 @@ static Position CreateListCell(List ahead,  NodeElement element){
 	return position;
 }
 
-static void OverViewList(List head){
+List CreateHead()
+{
+	List head = NULL;
+	Position position = NULL;
+	head  = (Position)malloc(sizeof(struct Node));
+	if(head==NULL){
+		fprintf(stderr, "there is no space\n");
+		return NULL;
+	}
+	head->element = 1;
+	head->Next = NULL;
+	return head;
+}
+
+void OverViewList(List head)
+{
 	Position position = head;
 	while(position!=NULL){
 		printf("element is %d\n", position->element);
 		position = position->Next;
 	}
 }
-
-int main()
-{
-	List head=NULL;
-	Position position = NULL;
-	head  = (Position)malloc(sizeof(struct Node));
-	if(head==NULL){
-		fprintf(stderr, "there is no space\n");
-		return -1;
-	}
-	head->element = 0;
-	head->Next = NULL;
-	
-	position = CreateListCell(head, 1);
-	position = CreateListCell(position, 2);
-	OverViewList(head);
-}
+ 

@@ -115,7 +115,7 @@ List CreateHead()
 		fprintf(stderr, "there is no space\n");
 		return NULL;
 	}
-	head->element = 1;
+	head->element = 0;
 	head->Next = NULL;
 	return head;
 }

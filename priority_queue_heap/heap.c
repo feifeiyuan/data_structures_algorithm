@@ -8,26 +8,51 @@
 
 static PriorityHeap Initialize(int MaxElement)
 {
-	PriorityHeap head = NULL;
-	head =(PriorityHeap)malloc(sizeof(*head));
-	if(head==NULL){
+	PriorityHeap heap = NULL;
+	heap =(PriorityHeap)malloc(sizeof(*heap));
+	if(heap==NULL){
 		fprintf(stderr, "there is no space\n");
 		return NULL;
 	}
-	memset(head,0,sizeof(*head));
+	memset(heap,0,sizeof(*heap));
 	
-	head->element = (ElementType *)malloc(MaxElement*sizeof(ElementType));
-	if(head->element==NULL){
+	heap->element = (ElementType *)malloc((MaxElement+1)*sizeof(ElementType));
+	if(heap->element==NULL){
 		fprintf(stderr, "there is no space\n");
 		return NULL;
 	}
-	memset(head->element, 0, sizeof(ElementType)*MaxElement);
-	head->capacity = MaxElement;
-	head->size = 0;
-	
+	memset(heap->element, 0, sizeof(ElementType)*(MaxElement+1));
+	heap->capacity = MaxElement;
+	heap->size = 0;
+	return heap;
+}
+
+static void Insert(ElementType x, PriorityHeap heap)
+{
+	int i = 0;
+	//size的值是在这里发生变化的
+	//printf("++heap->size is %d\n", ++heap->size);
+	//printf("heap->size++ is %d\n", heap->size++);
+	//printf("x is %d\n", x);
+	for(i=++heap->size;heap->element[i/2]>x;i/=2){
+		//printf("before: heap->size is %d\t heap->element[%d] is %d\n", heap->size, i, heap->element[i]);
+		heap->element[i] = heap->element[i/2];
+		//printf("after: heap->size is %d\t heap->element[%d] is %d\n", heap->size, i, heap->element[i]);
+	}
+	heap->element[i] = x;
+	return ;
 }
 
 int main()
 {
-	
+	PriorityHeap heap = NULL;
+	heap = Initialize(30);
+	int ar[] = { 32, 21, 16, 24, 31, 19, 68, 65, 26, 13 };  
+	int i = 0;
+	for ( i = 0; i < sizeof(ar)/sizeof(ar[0]); i++ ){
+        Insert( ar[i], heap);
+	}
+	for(i=0;i<heap->size;i++){
+		printf("%d\t", heap->element[i]);
+	}
 }
